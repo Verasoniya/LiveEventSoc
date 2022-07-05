@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
+import CustomButton from "./CustomButton";
 
 const CardHome = (props) => {
   return (
@@ -32,14 +33,10 @@ const CardMyEvent = (props) => {
         </div>
         <div className="flex self-start lg:self-end mt-4 lg:mt-0">
           <div>
-            <button className="p-4 bg-blue-700 rounded-sm mr-4">
-              <FaPencilAlt className="text-white" />
-            </button>
+            <CustomButton label={<FaPencilAlt />} onClick={props.onClickEditMyEvent} />
           </div>
-          <div>
-            <button className="p-4 bg-red-700 rounded-sm">
-              <FaTrashAlt className="text-white" />
-            </button>
+          <div className="ml-4">
+            <CustomButton label={<FaTrashAlt />} onClick={props.onClickDelMyEvent} color={"red"} />
           </div>
         </div>
       </div>
@@ -62,9 +59,7 @@ const CardMyJoined = (props) => {
         </div>
         <div className="flex self-start lg:self-end mt-4 lg:mt-0">
           <div>
-            <button className="p-4 bg-red-700 rounded-sm">
-              <FaTrashAlt className="text-white" />
-            </button>
+            <CustomButton label={<FaTrashAlt />} onClick={props.onClickDelEvent} color={"red"} />
           </div>
         </div>
       </div>
