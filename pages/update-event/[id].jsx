@@ -1,14 +1,13 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import CustomButton from "../components/CustomButton";
-import { Input } from "../components/Input";
-import Layout from "../components/Layout";
+import CustomButton from "../../components/CustomButton";
+import { Input } from "../../components/Input";
+import Layout from "../../components/Layout";
 
-function CreateEvent() {
+function UpdateEvent() {
   const router = useRouter();
   const [objSubmit, setObjSubmit] = useState("");
-  const [disabled, setDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
   const [event_name, setEventName] = useState("");
   const [capacity, setCapacity] = useState("");
@@ -21,17 +20,45 @@ function CreateEvent() {
   const [price, setPrice] = useState("");
   const [address, setAddress] = useState("");
 
-  // useEffect(() => {
-  //   if (event_name && image_url && description && date_start && date_finish && start_at && finish_at && price && address) {
-  //     setDisabled(false);
-  //   } else {
-  //     setDisabled(true);
-  //   }
-  // }, [event_name, image_url, description, date_start, date_finish, start_at, finish_at, price, address]);
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTIyODYsInVzZXJJZCI6OX0.hZ5HC06L8-4D2Ck6Ek2YV4VlCjwAIBCGjVDhA5f2Ynk";
+  const { id } = router.query;
+
+  useEffect(() => {
+    fetchDetailEvent();
+  }, []);
+
+  const fetchDetailEvent = async () => {
+    var requestDetailEvent = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    fetch(`https://live-event.social/events/${id}`, requestDetailEvent)
+      .then((response) => response.json())
+      .then((result) => {
+        const { data } = result;
+        const { event_name, file, description, date_start, date_finish, start_at, finish_at, price, address, capacity } = data;
+
+        setEventName(event_name);
+        setDescrip(description);
+        setDateStart(date_start);
+        setDateFinish(date_finish);
+        setStartAt(start_at);
+        setFinishAt(finish_at);
+        setPrice(price);
+        setCapacity(capacity);
+        setAddress(address);
+        const insertHTTPS = image.replace("http", "https");
+        setFile(insertHTTPS);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => setLoading(false));
+  };
 
   const handleSubmit = async (e) => {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTIyODYsInVzZXJJZCI6OX0.hZ5HC06L8-4D2Ck6Ek2YV4VlCjwAIBCGjVDhA5f2Ynk";
-
     setLoading(true);
     e.preventDefault();
     const formData = new FormData();
@@ -39,16 +66,16 @@ function CreateEvent() {
       formData.append(key, objSubmit[key]);
     }
     var requestOptions = {
-      method: "POST",
+      method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
       },
       body: formData,
     };
-    fetch("https://live-event.social/events/", requestOptions)
+    fetch(`https://live-event.social/events/${id}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        alert("Your Event is Added");
+        alert("Your Event is Updated");
         setObjSubmit({});
         router.push("/my-list-event");
       })
@@ -57,21 +84,17 @@ function CreateEvent() {
       })
       .finally(() => setLoading(false));
   };
+
   const handleChange = (value, key) => {
     let temp = { ...objSubmit };
     temp[key] = value;
     setObjSubmit(temp);
   };
 
-  const handleCancel = (e) => {
-    e.preventDefault();
-    router.push("my-list-event");
-  };
-
   return (
     <>
       <Head>
-        <title>Live Event Social - Create Event</title>
+        <title>Live Event Social - Update Event</title>
         <link rel="shortcut icon" type="image/png" sizes="16x16" href="/les-logo2.png" />
       </Head>
       <Layout>
@@ -143,7 +166,7 @@ function CreateEvent() {
               <CustomButton label="CANCEL" id="btn-cancel" color="red" onClick={(e) => handleCancel(e)} />
             </div>
             <div className="w-full my-2">
-              <CustomButton label="SUBMIT" id="btn-submit" onClick={(e) => handleSubmit(e)} />
+              <CustomButton label="UPDATE" id="btn-submit" onClick={(e) => handleSubmit(e)} />
             </div>
           </div>
         </form>
@@ -152,4 +175,4 @@ function CreateEvent() {
   );
 }
 
-export default CreateEvent;
+export default UpdateEvent;

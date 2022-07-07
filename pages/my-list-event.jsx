@@ -19,7 +19,7 @@ function MyListEvent() {
   }, []);
 
   const fetchMyList = async () => {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMDY4MjIsInVzZXJJZCI6OX0.hUnTrOSxipIRGGuo4VqtImY1l6WAT7V9AWuG217rrkM";
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTIyODYsInVzZXJJZCI6OX0.hZ5HC06L8-4D2Ck6Ek2YV4VlCjwAIBCGjVDhA5f2Ynk";
     var requestOptions = {
       method: "GET",
       headers: {
@@ -39,6 +39,8 @@ function MyListEvent() {
       })
       .finally(() => setLoading(false));
   };
+  const handleDelMyEvent = (id) => {};
+
   if (loading) {
     return (
       <div className="flex justify-center content-center">
@@ -55,7 +57,7 @@ function MyListEvent() {
           <link rel="shortcut icon" type="image/png" sizes="16x16" href="/les-logo2.png" />
         </Head>
         <Layout>
-          <div className="w-14 h-14 text-3xl absolute bottom-12 right-8 md:bottom-14 md:right-16">
+          <div className="w-14 z-10 h-14 text-3xl absolute bottom-12 right-8 md:bottom-14 md:right-16">
             <CustomButton label={"+"} radius={"50%"} onClick={() => router.push("create-event")} />
           </div>
           <div className="flex justify-center">
@@ -74,6 +76,8 @@ function MyListEvent() {
                   timeStart={item.start_at}
                   price={item.price}
                   onClickDetailEvent={() => router.push(`/detail-event/${item.id}`)}
+                  onClickEditMyEvent={() => router.push(`/update-event/${item.id}`)}
+                  onClickDelMyEvent={() => handleDelMyEvent(item.id)}
                 />
               ))}
             </div>
