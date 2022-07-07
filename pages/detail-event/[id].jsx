@@ -30,6 +30,10 @@ function DetailEvent() {
   const [price, setPrice] = useState("");
   const [address, setAddress] = useState("");
   const [disabled, setDisabled] = useState(true);
+  const [token, setToken] = useState(null);
+
+  const getToken = `${localStorage.getItem("token")}`;
+  setToken(getToken);
 
   useEffect(() => {
     fetchDetailEvent();
@@ -43,7 +47,7 @@ function DetailEvent() {
     }
   }, [content]);
 
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTIyODYsInVzZXJJZCI6OX0.hZ5HC06L8-4D2Ck6Ek2YV4VlCjwAIBCGjVDhA5f2Ynk";
+  // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTIyODYsInVzZXJJZCI6OX0.hZ5HC06L8-4D2Ck6Ek2YV4VlCjwAIBCGjVDhA5f2Ynk";
   const { id } = router.query;
 
   const fetchDetailEvent = async () => {

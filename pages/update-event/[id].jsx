@@ -19,8 +19,12 @@ function UpdateEvent() {
   const [finish_at, setFinishAt] = useState("");
   const [price, setPrice] = useState("");
   const [address, setAddress] = useState("");
+  const [token, setToken] = useState(null);
 
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTIyODYsInVzZXJJZCI6OX0.hZ5HC06L8-4D2Ck6Ek2YV4VlCjwAIBCGjVDhA5f2Ynk";
+  const getToken = `${localStorage.getItem("token")}`;
+  setToken(getToken);
+
+  // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTIyODYsInVzZXJJZCI6OX0.hZ5HC06L8-4D2Ck6Ek2YV4VlCjwAIBCGjVDhA5f2Ynk";
   const { id } = router.query;
 
   useEffect(() => {
