@@ -13,16 +13,13 @@ function MyListEvent() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [mylist, setMyList] = useState([]);
-  const [token, setToken] = useState(null);
-
-  const getToken = `${localStorage.getItem("token")}`;
-  setToken(getToken);
 
   useEffect(() => {
     fetchMyList();
   }, []);
 
   // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTIyODYsInVzZXJJZCI6OX0.hZ5HC06L8-4D2Ck6Ek2YV4VlCjwAIBCGjVDhA5f2Ynk";
+  const token = `${localStorage.getItem("token")}`;
 
   const fetchMyList = async () => {
     var requestOptions = {

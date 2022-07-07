@@ -20,13 +20,10 @@ function CreateEvent() {
   const [finish_at, setFinishAt] = useState("");
   const [price, setPrice] = useState("");
   const [address, setAddress] = useState("");
-  const [token, setToken] = useState(null);
-
-  const getToken = `${localStorage.getItem("token")}`;
-  setToken(getToken);
 
   const handleSubmit = async (e) => {
-    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTIyODYsInVzZXJJZCI6OX0.hZ5HC06L8-4D2Ck6Ek2YV4VlCjwAIBCGjVDhA5f2Ynk";
+    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTc1MjksInVzZXJJZCI6OX0.ujY3nJyOSLrMw9EDyV5CsAJwHt1mAUeQFM_gNk4yA74";
+    const token = `${localStorage.getItem("token")}`;
 
     setLoading(true);
     e.preventDefault();

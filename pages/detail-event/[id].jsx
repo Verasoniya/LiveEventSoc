@@ -15,7 +15,7 @@ import logo from "../../assets/les-logo-2.png";
 
 function DetailEvent() {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [attendees, setAttendees] = useState([]);
   const [comments, setComments] = useState([]);
   const [content, setContent] = useState("");
@@ -30,10 +30,6 @@ function DetailEvent() {
   const [price, setPrice] = useState("");
   const [address, setAddress] = useState("");
   const [disabled, setDisabled] = useState(true);
-  const [token, setToken] = useState(null);
-
-  const getToken = `${localStorage.getItem("token")}`;
-  setToken(getToken);
 
   useEffect(() => {
     fetchDetailEvent();
@@ -47,10 +43,11 @@ function DetailEvent() {
     }
   }, [content]);
 
-  // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTIyODYsInVzZXJJZCI6OX0.hZ5HC06L8-4D2Ck6Ek2YV4VlCjwAIBCGjVDhA5f2Ynk";
+  // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMjA4NjAsInVzZXJJZCI6OX0.cBaLDq0btySh8up5_orempBQrZuCaKwpj08VmCEnaJ0";
+  const token = `${localStorage.getItem("token")}`;
   const { id } = router.query;
 
-  const fetchDetailEvent = async () => {
+  const fetchDetailEvent = () => {
     var requestDetailEvent = { method: "GET" };
 
     fetch(`https://live-event.social/events/${id}`, requestDetailEvent)
@@ -86,7 +83,7 @@ function DetailEvent() {
       },
     };
 
-    fetch(`https://live-event.social/attendees/events/${id}`, requestAttendees)
+    await fetch(`https://live-event.social/attendees/events/${id}`, requestAttendees)
       .then((response) => response.json())
       .then((result) => {
         const { data } = result;
@@ -106,7 +103,7 @@ function DetailEvent() {
         Authorization: `Bearer ${token}`,
       },
     };
-    fetch(`https://live-event.social/comments/${id}`, requestComments)
+    await fetch(`https://live-event.social/comments/${id}`, requestComments)
       .then((response) => response.json())
       .then((result) => {
         const { data } = result;
@@ -132,7 +129,7 @@ function DetailEvent() {
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: JSON.stringify(body),
     };
-    fetch(`https://live-event.social/comments`, requestAddComments)
+    await fetch(`https://live-event.social/comments`, requestAddComments)
       .then((response) => response.json())
       .then((result) => {
         alert("Your Comments are Added!");
@@ -140,7 +137,7 @@ function DetailEvent() {
       .catch((error) => {
         alert(error.toString());
       })
-      .finally(() => fetchComments());
+      .finally(() => setLoading(false));
   };
 
   const handleJoin = async () => {
@@ -151,7 +148,7 @@ function DetailEvent() {
       },
     };
 
-    fetch(`https://live-event.social/attendees/events/${id}`, requestJoin)
+    await fetch(`https://live-event.social/attendees/events/${id}`, requestJoin)
       .then((response) => response.json())
       .then((result) => {
         alert("Successfully to Join!");
@@ -200,7 +197,7 @@ function DetailEvent() {
           <div className="flex flex-col items-center">
             <div className="flex flex-col justify-start my-10 px-4 md:px-0 w-full md:w-3/4">
               <p className="font-semibold text-2xl mb-2">{event_name}</p>
-              <Image src={image_url} alt={image_url} width={"100%"} height={300} className="my-5" />
+              <Image src={image_url} alt={image_url} width={500} height={300} className="my-5" />
               <p className="font-semibold text-lg my-2">{full_name.toUpperCase()}</p>
               <div className="flex flex-col md:flex-row mt-6">
                 <div className="flex flex-col w-full md:w-2/3">
