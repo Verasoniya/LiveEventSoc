@@ -2,8 +2,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 const Header = () => {
+  // Aku tambahin z-10
   return (
-    <nav className="sticky top-0 w-full px-2 py-2.5 bg-white flex justify-between shadow-lg">
+    <nav className="sticky z-10 top-0 w-full px-2 py-2.5 bg-white flex justify-between shadow-lg">
       <Link id="to-homepage" className="text-black font-bold" href="/">
         Event.
       </Link>
