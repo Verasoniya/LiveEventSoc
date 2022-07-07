@@ -21,14 +21,6 @@ function CreateEvent() {
   const [price, setPrice] = useState("");
   const [address, setAddress] = useState("");
 
-  // useEffect(() => {
-  //   if (event_name && image_url && description && date_start && date_finish && start_at && finish_at && price && address) {
-  //     setDisabled(false);
-  //   } else {
-  //     setDisabled(true);
-  //   }
-  // }, [event_name, image_url, description, date_start, date_finish, start_at, finish_at, price, address]);
-
   const handleSubmit = async (e) => {
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTIyODYsInVzZXJJZCI6OX0.hZ5HC06L8-4D2Ck6Ek2YV4VlCjwAIBCGjVDhA5f2Ynk";
 

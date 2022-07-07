@@ -18,8 +18,9 @@ function MyListEvent() {
     fetchMyList();
   }, []);
 
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTIyODYsInVzZXJJZCI6OX0.hZ5HC06L8-4D2Ck6Ek2YV4VlCjwAIBCGjVDhA5f2Ynk";
+
   const fetchMyList = async () => {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMTIyODYsInVzZXJJZCI6OX0.hZ5HC06L8-4D2Ck6Ek2YV4VlCjwAIBCGjVDhA5f2Ynk";
     var requestOptions = {
       method: "GET",
       headers: {
@@ -39,7 +40,24 @@ function MyListEvent() {
       })
       .finally(() => setLoading(false));
   };
-  const handleDelMyEvent = (id) => {};
+  const handleDelMyEvent = (id) => {
+    var requestDelMyEvent = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    fetch(`https://live-event.social/events/${id}`, requestDelMyEvent)
+      .then((response) => response.json())
+      .then((result) => {
+        alert("Your Event Deleted");
+        window.location.reload(true);
+      })
+      .catch((error) => {
+        alert(error);
+      })
+      .finally(() => setLoading(false));
+  };
 
   if (loading) {
     return (
