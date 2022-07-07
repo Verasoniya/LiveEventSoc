@@ -19,7 +19,7 @@ function MyListEvent() {
   }, []);
 
   const fetchMyList = async () => {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcxOTY2MTEsInVzZXJJZCI6OX0.OQID4oK6phyqJxU9xbhr5g9fGav_L_zufGTrECV-hPM";
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMDY4MjIsInVzZXJJZCI6OX0.hUnTrOSxipIRGGuo4VqtImY1l6WAT7V9AWuG217rrkM";
     var requestOptions = {
       method: "GET",
       headers: {

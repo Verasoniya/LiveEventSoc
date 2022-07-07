@@ -1,10 +1,43 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect } from "react";
 import CustomButton from "../components/CustomButton";
 import { Input } from "../components/Input";
 import Layout from "../components/Layout";
 
 function UpdateEvent() {
+  const [email, setEmail] = useState("");
+
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMDY4MjIsInVzZXJJZCI6OX0.hUnTrOSxipIRGGuo4VqtImY1l6WAT7V9AWuG217rrkM";
+
+  useEffect(() => {
+    fetchDetailEvent();
+  }, []);
+
+  const fetchDetailEvent = async () => {
+    var requestDetailEvent = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    fetch("", requestDetailEvent)
+      .then((response) => response.json())
+      .then((result) => {
+        const { data } = result;
+        const { email, first_name, last_name, image } = data;
+
+        setEmail(email);
+        setFirstName(first_name);
+        setLastName(last_name);
+        const insertHTTPS = image.replace("http", "https");
+        setImage(insertHTTPS);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => setLoading(false));
+  };
+
   return (
     <>
       <Head>

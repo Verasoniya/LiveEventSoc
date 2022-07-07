@@ -12,7 +12,7 @@ function CreateEvent() {
   const [loading, setLoading] = useState(false);
   const [event_name, setEventName] = useState("");
   const [capacity, setCapacity] = useState("");
-  const [image_url, setImageUrl] = useState("");
+  const [file, setFile] = useState("");
   const [description, setDescrip] = useState("");
   const [date_start, setDateStart] = useState("");
   const [date_finish, setDateFinish] = useState("");
@@ -30,7 +30,7 @@ function CreateEvent() {
   // }, [event_name, image_url, description, date_start, date_finish, start_at, finish_at, price, address]);
 
   const handleSubmit = async (e) => {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcxOTY2MTEsInVzZXJJZCI6OX0.OQID4oK6phyqJxU9xbhr5g9fGav_L_zufGTrECV-hPM";
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMDY4MjIsInVzZXJJZCI6OX0.hUnTrOSxipIRGGuo4VqtImY1l6WAT7V9AWuG217rrkM";
 
     setLoading(true);
     e.preventDefault();
@@ -38,17 +38,6 @@ function CreateEvent() {
     for (const key in objSubmit) {
       formData.append(key, objSubmit[key]);
     }
-    // const body = {
-    //   event_name,
-    //   image_url,
-    //   description,
-    //   date_start,
-    //   date_finish,
-    //   start_at,
-    //   finish_at,
-    //   price,
-    //   address,
-    // };
     var requestOptions = {
       method: "POST",
       headers: {
@@ -97,8 +86,8 @@ function CreateEvent() {
               placeholder="Image of Event"
               id="image-event"
               onChange={(e) => {
-                setImageUrl(URL.createObjectURL(e.target.files[0]));
-                handleChange(e.target.files[0], "image_url");
+                setFile(URL.createObjectURL(e.target.files[0]));
+                handleChange(e.target.files[0], "file");
               }}
             />
           </div>

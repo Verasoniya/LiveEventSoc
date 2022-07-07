@@ -43,7 +43,7 @@ function DetailEvent() {
     }
   }, [content]);
 
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcxOTY2MTEsInVzZXJJZCI6OX0.OQID4oK6phyqJxU9xbhr5g9fGav_L_zufGTrECV-hPM";
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NTcyMDY4MjIsInVzZXJJZCI6OX0.hUnTrOSxipIRGGuo4VqtImY1l6WAT7V9AWuG217rrkM";
   const { id } = router.query;
 
   const fetchDetailEvent = async () => {
@@ -55,7 +55,7 @@ function DetailEvent() {
         const { data } = result;
         const { event_name, image_url, description, date_start, date_finish, start_at, finish_at, price, address } = data;
         const { full_name } = data.user;
-        console.log(data.user);
+        console.log(image_url);
 
         setEventName(event_name);
         setFullName(full_name);
@@ -116,10 +116,11 @@ function DetailEvent() {
   };
 
   const handleAddComments = async (e) => {
+    const event_id = parseInt(id);
     setLoading(true);
     e.preventDefault();
     const body = {
-      event_id: id,
+      event_id,
       content,
     };
     var requestAddComments = {
@@ -130,14 +131,12 @@ function DetailEvent() {
     fetch(`https://live-event.social/comments`, requestAddComments)
       .then((response) => response.json())
       .then((result) => {
-        // const { data } = result;
-        // console.log(data);
         alert("Your Comments are Added!");
       })
       .catch((error) => {
         alert(error.toString());
       })
-      .finally(() => setLoading(false));
+      .finally(() => fetchComments());
   };
 
   const handleJoin = async () => {
@@ -197,7 +196,7 @@ function DetailEvent() {
           <div className="flex flex-col items-center">
             <div className="flex flex-col justify-start my-10 px-4 md:px-0 w-full md:w-3/4">
               <p className="font-semibold text-2xl mb-2">{event_name}</p>
-              {/* <Image src={image_url} alt={image_url} width={"100%"} height={300} className="my-5" /> */}
+              <Image src={image_url} alt={image_url} width={"100%"} height={300} className="my-5" />
               <p className="font-semibold text-lg my-2">{full_name.toUpperCase()}</p>
               <div className="flex flex-col md:flex-row mt-6">
                 <div className="flex flex-col w-full md:w-2/3">
@@ -237,7 +236,7 @@ function DetailEvent() {
               <div className="grid w-full md:w-3/4 grid-cols-1 md:grid-cols-2 gap-4">
                 {attendees.map((item) => (
                   <div className="flex" key={item.key}>
-                    {/* <Image src={item.image_url} alt={item.image_url} width={40} height={40} className="rounded-full" /> */}
+                    <Image src={item.user.image_url} alt={item.user.image_url} width={40} height={40} className="rounded-full" />
                     <p className="text-base self-center ml-3">{item.user.user_name}</p>
                   </div>
                 ))}
