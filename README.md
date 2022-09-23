@@ -1,6 +1,6 @@
 <div align="center">
     <br>
-        <img src="https://drive.google.com/uc?export=view&id=1sNmC93XFQW9EY2OyBT3lnpgaUZRKF1UR" alt="Live Event SOC" width="100px"/>
+        <img src="https://drive.google.com/uc?export=view&id=1sNmC93XFQW9EY2OyBT3lnpgaUZRKF1UR" alt="Live Event SOC" width="200px"/>
 
 # Live Event SOC
 
@@ -175,7 +175,7 @@ This project is built by frontend team and backend team.
         <a href="https://github.com/Rafkimaisya">
           <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/github/github-original-wordmark.svg" alt="Github - Rafki Maisya Rahman" width="40"/>
         </a>&nbsp;
-        <a href="ttps://www.linkedin.com/in/rafkimaisya/">
+        <a href="https://www.linkedin.com/in/rafkimaisya/">
           <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/linkedin/linkedin-original.svg" title="Linked In" alt="Linked In - Rafki Maisya Rahman" width="40"/>
         </a>
       </td>
